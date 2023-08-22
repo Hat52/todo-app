@@ -20,11 +20,30 @@ export const counterSlice = createSlice({
 	reducers: {
 		addTodo: (state, { payload }) => {
 			state.todos = [...state.todos, payload];
+		},
+		deleteTodo: (state, { payload }) => {
+			state.todos = state.todos.filter((todo) => todo.id !== payload);
+		},
+		updateTodo: (state, { payload }) => {
+			state.todos = state.todos.map((todo) => {
+				if (todo.id === payload.id) {
+					todo.title = payload.title;
+				}
+				return todo;
+			});
+		},
+		changeStatus: (state, { payload }) => {
+			state.todos = state.todos.map((todo) => {
+				if (todo.id === payload) {
+					todo.status = !todo.status;
+				}
+				return todo;
+			});
 		}
 	}
 });
 
 // Action creators are generated for each case reducer function
-export const { addTodo } = counterSlice.actions;
+export const { addTodo, deleteTodo, updateTodo, changeStatus } = counterSlice.actions;
 
 export default counterSlice.reducer;
