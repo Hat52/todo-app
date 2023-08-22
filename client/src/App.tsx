@@ -1,4 +1,8 @@
 import { useRef, useState } from 'react';
+import store from './redux/store';
+import { Provider, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { addTodo } from './redux/todo.slice';
 
 type todoType = {
 	id: number;
@@ -7,23 +11,32 @@ type todoType = {
 };
 
 function App() {
-	const [todo, setTodo] = useState<todoType[]>([]);
+	return (
+		<Provider store={store}>
+			<Dummy />
+		</Provider>
+	);
+}
+
+const Dummy = () => {
+	// const [todo, setTodo] = useState<todoType[]>([]);
+	const dispatch = useDispatch();
+	const todo: todoType[] = useSelector((store: any) => store.todo.todos);
 
 	const inputRef = useRef<HTMLInputElement>();
 
-	const addTodo = () => {
+	const insertTodo = () => {
 		if (!inputRef || !inputRef.current) {
 			return;
 		}
 		const value = inputRef.current.value;
-		setTodo((prev: todoType[]) => [
-			...prev,
-			{
+		dispatch(
+			addTodo({
 				id: todo.length,
 				title: value || '',
 				status: false
-			}
-		]);
+			})
+		);
 		inputRef.current.value = '';
 	};
 
@@ -42,7 +55,7 @@ function App() {
 					/>
 				</div>
 				<button
-					onClick={addTodo}
+					onClick={insertTodo}
 					className="h-[40px] bg-blue-500 rounded-[8px] px-5 uppercase font-medium text-white">
 					Add
 				</button>
@@ -100,6 +113,6 @@ function App() {
 			</div>
 		</div>
 	);
-}
+};
 
 export default App;
