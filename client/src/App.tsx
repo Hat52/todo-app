@@ -48,25 +48,25 @@ const Dummy = () => {
 	};
 
 	return (
-		<div className="h-screen w-screen flex gap-5 flex-col items-center">
+		<div className="h-screen w-screen flex gap-5 py-5 flex-col items-center">
 			<h1 className="text-xl font-bold">Todo</h1>
-			<div className="flex items-end gap-5  w-[40%]">
+			<div className="flex items-end w-[40%]">
 				<div className="flex flex-col gap-2 w-full">
-					<label htmlFor="todo-input">Enter New Todo</label>
-					<textarea
+					<input
 						id="todo-input"
+						type="text"
 						value={todo}
 						onChange={({ target: { value } }) => {
 							setTodo(value);
 						}}
-						className="outline-none px-2 py-2 focus:shadow border h-[40px] rounded-[8px] min-h-[80px]"
+						className="outline-none px-2 py-2 focus:shadow border h-[40px] rounded-tl-md rounded-bl-md"
 						placeholder="Enter todo"
 					/>
 				</div>
 				<div className="flex gap-2">
 					<button
 						onClick={id ? editTodo : insertTodo}
-						className="h-[40px] bg-blue-500 rounded-[8px] px-5 uppercase font-medium text-white">
+						className="h-[40px] bg-blue-500 rounded-tr-md rounded-br-md px-5 uppercase font-medium text-white">
 						{id ? 'Edit' : 'Add'}
 					</button>
 					{id ? (
@@ -92,14 +92,14 @@ const Dummy = () => {
 			<div className="flex flex-col items-center gap-5 w-[80%] max-h-[70%] hide-scrollbar">
 				<ul className="w-[50%] p-2 flex flex-col gap-2 overflow-scroll">
 					{todos.map((currentTodo: todoType) => (
-						<li className="flex-col gap-5 items-center">
-							<div className="min-h-[60px] relative shadow-md ring-1 ring-gray-300 rounded-[8px]">
-								<p
-									className={`${
-										currentTodo.status ? 'line-through' : ''
-									} px-5 py-2 text-black`}>
-									{currentTodo.title}
-								</p>
+						<li className="flex shadow-md ring-1 ring-gray-300 rounded-[8px] items-center justify-between">
+							<p
+								className={`${
+									currentTodo.status ? 'line-through' : ''
+								} px-5 py-2 text-black`}>
+								{currentTodo.title}
+							</p>
+							{currentTodo.status ? null : (
 								<div className="flex gap-2 justify-center p-2">
 									<div>
 										<svg
@@ -132,22 +132,21 @@ const Dummy = () => {
 											/>
 										</svg>
 									</div>
-									{currentTodo.status ? null : (
-										<div>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="20"
-												height="20"
-												fill="green"
-												viewBox="0 0 24 24"
-												onClick={() => dispatch(changeStatus(currentTodo.id))}
-												className="hover:scale-125 cursor-pointer hover:fill-[green]">
-												<path d="M20.29 5.29l-10 10a1 1 0 0 1-1.42 0l-4-4a1 1 0 1 1 1.42-1.42L10 13.59l9.29-9.3a1 1 0 0 1 1.42 1.42z" />
-											</svg>
-										</div>
-									)}
+
+									<div>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="20"
+											height="20"
+											fill="green"
+											viewBox="0 0 24 24"
+											onClick={() => dispatch(changeStatus(currentTodo.id))}
+											className="hover:scale-125 cursor-pointer hover:fill-[green]">
+											<path d="M20.29 5.29l-10 10a1 1 0 0 1-1.42 0l-4-4a1 1 0 1 1 1.42-1.42L10 13.59l9.29-9.3a1 1 0 0 1 1.42 1.42z" />
+										</svg>
+									</div>
 								</div>
-							</div>
+							)}
 						</li>
 					))}
 				</ul>
