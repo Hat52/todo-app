@@ -3,6 +3,8 @@ import store from './redux/store';
 import { Provider, useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { addTodo, deleteTodo, updateTodo, changeStatus } from './redux/todo.slice';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 type todoType = {
 	id: number;
@@ -49,6 +51,9 @@ const Dummy = () => {
 
 	return (
 		<div className="h-screen w-screen flex gap-5 py-5 flex-col items-center">
+			<div className="w-[10%] absolute left-40 top-40">
+				<CircularProgressbar value={60} maxValue={100} text={`60%`} />
+			</div>
 			<h1 className="text-xl font-bold">Todo</h1>
 			<div className="flex items-end w-[40%]">
 				<div className="flex flex-col gap-2 w-full">
@@ -89,7 +94,7 @@ const Dummy = () => {
 				</div>
 			</div>
 			<hr className="w-[40%]" />
-			<div className="flex flex-col items-center gap-5 w-[80%] max-h-[70%] hide-scrollbar">
+			<div className="flex gap-5 justify-center w-[80%] max-h-[70%] hide-scrollbar">
 				<ul className="w-[50%] p-2 flex flex-col gap-2 overflow-scroll">
 					{todos.map((currentTodo: todoType) => (
 						<li className="flex shadow-md ring-1 ring-gray-300 rounded-[8px] items-center justify-between">
