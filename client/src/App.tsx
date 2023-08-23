@@ -31,7 +31,7 @@ const Dummy = () => {
 		}
 		dispatch(
 			addTodo({
-				id: todo.length,
+				id: Math.random().toString(16).slice(-4),
 				title: todo || '',
 				status: false
 			})
