@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import store from './redux/store';
 import { Provider, useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -23,6 +23,7 @@ function App() {
 const Dummy = () => {
 	const dispatch = useDispatch();
 	const todos: todoType[] = useSelector((store: any) => store.todo.todos);
+	const [percentage, setPercentage] = useState<number>(0);
 
 	const [todo, setTodo] = useState<string>('');
 	const [id, setId] = useState<number | null>();
@@ -49,10 +50,17 @@ const Dummy = () => {
 		setTodo('');
 	};
 
+	useEffect(() => {
+		const completedTodos = todos.filter((todo) => todo.status).length;
+		if (completedTodos) {
+			setPercentage(Math.floor((100 * completedTodos) / todos.length));
+		}
+	}, [todos, dispatch]);
+
 	return (
 		<div className="h-screen w-screen flex gap-5 py-5 flex-col items-center">
 			<div className="w-[10%] absolute left-40 top-40">
-				<CircularProgressbar value={60} maxValue={100} text={`60%`} />
+				<CircularProgressbar value={percentage} maxValue={100} text={`${percentage}%`} />
 			</div>
 			<h1 className="text-xl font-bold">Todo</h1>
 			<div className="flex items-end w-[40%]">
