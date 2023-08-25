@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import store from './redux/store';
 import { Provider, useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { addTodo, deleteTodo, updateTodo, changeStatus } from './redux/todo.slice';
-import { CircularProgressbar } from 'react-circular-progressbar';
+import { addTodo, updateTodo } from './redux/todo.slice';
 import 'react-circular-progressbar/dist/styles.css';
 import { ListView, Progressbar } from './components';
 import { todoType } from './typs';
@@ -53,6 +52,16 @@ const Todo = () => {
 		}
 	}, [todos, dispatch]);
 
+	const handleKeys = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === 'Enter') {
+			if (!id) {
+				insertTodo();
+				return;
+			}
+			editTodo();
+		}
+	};
+
 	return (
 		<div className="h-screen w-screen flex gap-5 py-5 flex-col items-center">
 			{todos.length ? <Progressbar percentage={percentage} /> : null}
@@ -66,6 +75,7 @@ const Todo = () => {
 						onChange={({ target: { value } }) => {
 							setTodo(value);
 						}}
+						onKeyDown={handleKeys}
 						className="outline-none px-2 py-2 focus:shadow border h-[40px] rounded-tl-md rounded-bl-md"
 						placeholder="Enter todo"
 					/>
