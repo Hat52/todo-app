@@ -11,12 +11,12 @@ import { todoType } from './typs';
 function App() {
 	return (
 		<Provider store={store}>
-			<Dummy />
+			<Todo />
 		</Provider>
 	);
 }
 
-const Dummy = () => {
+const Todo = () => {
 	const dispatch = useDispatch();
 	const todos: todoType[] = useSelector((store: any) => store.todo.todos);
 	const [percentage, setPercentage] = useState<number>(0);
