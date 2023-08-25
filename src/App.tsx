@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { addTodo, deleteTodo, updateTodo, changeStatus } from './redux/todo.slice';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { Progressbar } from './components';
 
 type todoType = {
 	id: number;
@@ -59,11 +60,7 @@ const Dummy = () => {
 
 	return (
 		<div className="h-screen w-screen flex gap-5 py-5 flex-col items-center">
-			{todos.length ? (
-				<div className="w-[10%] absolute left-40 top-40">
-					<CircularProgressbar value={percentage} maxValue={100} text={`${percentage}%`} />
-				</div>
-			) : null}
+			{todos.length ? <Progressbar percentage={percentage} /> : null}
 			<h1 className="text-[30px] text-[blue] font-bold ">Todo App</h1>
 			<div className="flex items-end w-[40%]">
 				<div className="flex flex-col gap-2 w-full">
