@@ -64,7 +64,7 @@ const Dummy = () => {
 					<CircularProgressbar value={percentage} maxValue={100} text={`${percentage}%`} />
 				</div>
 			) : null}
-			<h1 className="text-xl font-bold">Todo</h1>
+			<h1 className="text-[30px] text-[blue] font-bold ">Todo App</h1>
 			<div className="flex items-end w-[40%]">
 				<div className="flex flex-col gap-2 w-full">
 					<input
