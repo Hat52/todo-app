@@ -59,9 +59,11 @@ const Dummy = () => {
 
 	return (
 		<div className="h-screen w-screen flex gap-5 py-5 flex-col items-center">
-			<div className="w-[10%] absolute left-40 top-40">
-				<CircularProgressbar value={percentage} maxValue={100} text={`${percentage}%`} />
-			</div>
+			{todos.length ? (
+				<div className="w-[10%] absolute left-40 top-40">
+					<CircularProgressbar value={percentage} maxValue={100} text={`${percentage}%`} />
+				</div>
+			) : null}
 			<h1 className="text-xl font-bold">Todo</h1>
 			<div className="flex items-end w-[40%]">
 				<div className="flex flex-col gap-2 w-full">
