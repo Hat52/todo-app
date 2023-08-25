@@ -6,12 +6,7 @@ import { addTodo, deleteTodo, updateTodo, changeStatus } from './redux/todo.slic
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { ListView, Progressbar } from './components';
-
-type todoType = {
-	id: number;
-	title: string;
-	status: boolean;
-};
+import { todoType } from './typs';
 
 function App() {
 	return (

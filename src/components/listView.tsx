@@ -1,11 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { changeStatus, deleteTodo } from '../redux/todo.slice';
-
-type todoType = {
-	id: number;
-	title: string;
-	status: boolean;
-};
+import { todoType } from '../typs';
 
 type TListView = {
 	setTodo: (e: string) => void;
